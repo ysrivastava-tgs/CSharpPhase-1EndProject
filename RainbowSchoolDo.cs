@@ -13,7 +13,7 @@ namespace CSharpPhase_1EndProject
             do
             {
                 Console.WriteLine("Choose option");
-                Console.WriteLine("1.Add Teacher\n2.Search Teacher By Id\n3.Show Teachers List\n4.Exit");
+                Console.WriteLine("1.Add Teacher\n2.Search Teacher By Id\n3.Show Teachers List\n4.Update Teacher Details\n5.Exit");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch(option)
                 {
@@ -23,7 +23,10 @@ namespace CSharpPhase_1EndProject
                         break;
                     case 3: ShowAllTeacher();
                         break;
-                    case 4: Environment.Exit(0);
+                    case 4: UpdateTeacher();
+                        break;
+                    case 5:
+                        Environment.Exit(0);
                         break;
                 }
                 Console.WriteLine("Want to continue?(Type yes/no)");
@@ -58,6 +61,17 @@ namespace CSharpPhase_1EndProject
             else
                 foreach(Teacher t in list)
                     Console.WriteLine($"ID: {t.ID}\tName: {t.Name}\tClass And Section: {t.ClassAndSection}");
+        }
+        public static void UpdateTeacher()
+        {
+            Console.WriteLine("Enter id");
+            int id = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter Name to be corrected");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter Class and Section to be updated");
+            string cls = Console.ReadLine();
+            Teacher t = new Teacher(id, name, cls);
+            TeacherCRUD.UpdateTeacher(t);
         }
     }
 }

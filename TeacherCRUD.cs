@@ -7,11 +7,12 @@ namespace CSharpPhase_1EndProject
 {
     public static class TeacherCRUD
     {
+        
         public static string GetPath()
         {
             string dir = Directory.GetCurrentDirectory();
-            String path = dir + "\\RainbowSchoolTeacherData.txt";
-            return path;
+            String p = dir + "\\RainbowSchoolTeacherData.txt";
+            return p;
         }
         public static  void AddTeacher(int id,string name,string cls)
         {
@@ -59,6 +60,31 @@ namespace CSharpPhase_1EndProject
                 }
             }
             return list;
+        }
+        public static void UpdateTeacher(Teacher t)
+        {
+            string path = GetPath();
+            int id = t.ID;
+            List<string> l = new List<string>();
+            string[] content = File.ReadAllLines(path);
+            StreamWriter writer = File.CreateText(path);
+            if (File.Exists(path))
+            {
+                
+                foreach (string line in content)
+                {
+                    string[] details = line.Split(",");
+                    if (id == Convert.ToInt32(details[0]))
+                    {
+                        writer.WriteLine(details[0].ToString() + "," + t.Name + "," + t.ClassAndSection);
+                    }
+                    else
+                    {
+                        writer.WriteLine(details[0].ToString()+","+details[1]+","+details[2]);
+                    }
+                }
+                writer.Close();
+            }
         }
     }
 }
